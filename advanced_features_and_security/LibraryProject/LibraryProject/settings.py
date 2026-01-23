@@ -23,7 +23,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-pv3e11xc!o(!c$p8&h1fcd6a)g!do60-mz*4lahs#(kx$m8$)7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+# Prevent reflected XSS attacks
+SECURE_BROWSER_XSS_FILTER = True
+# Prevent MIME-typer sniffing
+SECURE_CONTENT_TYPE_NOSNIFF = True
+# Prevent clickjacking
+X_FRAME_OPTIONS = 'DENY'
+# only send cookies over HTTPS
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = []
 
@@ -39,10 +49,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bookshelf',
     'relationship_app',
+    'csp',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'csp.middleware.CSPMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,3 +134,27 @@ AUTH_USER_MODEL = 'bookshelf.CustomUser'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Content Security Policy configuration
+
+CSP_DEFAULT_SRC = ("'self'",)
+
+CSP_SCRIPT_SRC = (
+    "'self'",
+)
+
+CSP_STYLE_SRC = (
+    "'self'",
+)
+
+CSP_IMG_SRC = (
+    "'self'",
+)
+
+CSP_FONT_SRC = (
+    "'self'",
+)
+
+CSP_OBJECT_SRC = ("'none'",)
+CSP_BASE_URI = ("'self'",)
+CSP_FRAME_ANCESTORS = ("'none'",)
