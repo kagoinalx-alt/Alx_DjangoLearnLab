@@ -31,7 +31,7 @@ def delete_book(request, book_id):
 
 
 def book_list(request):
-    form = BookSearchForm(request.GET)
+    form = ExampleForm(request.GET)
     books = Book.objects.all()
 
     if form.is_valid():
