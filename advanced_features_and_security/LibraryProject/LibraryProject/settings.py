@@ -46,7 +46,7 @@ SESSION_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -147,25 +147,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Content Security Policy configuration
-
-CSP_DEFAULT_SRC = ("'self'",)
-
-CSP_SCRIPT_SRC = (
-    "'self'",
-)
-
-CSP_STYLE_SRC = (
-    "'self'",
-)
-
-CSP_IMG_SRC = (
-    "'self'",
-)
-
-CSP_FONT_SRC = (
-    "'self'",
-)
-
-CSP_OBJECT_SRC = ("'none'",)
-CSP_BASE_URI = ("'self'",)
-CSP_FRAME_ANCESTORS = ("'none'",)
+CONTENT_SECURITY_POLICY = {
+    'DIRECTIVES': {
+        'base-uri': ("'self'",),
+        'default-src': ("'self'",),
+        'font-src': ("'self'",),
+        'frame-ancestors': ("'none'",),
+        'img-src': ("'self'",),
+        'object-src': ("'none'",),
+        'script-src': ("'self'",),
+        'style-src': ("'self'",),
+    }
+}
