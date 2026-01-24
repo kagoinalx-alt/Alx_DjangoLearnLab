@@ -25,6 +25,15 @@ SECRET_KEY = 'django-insecure-pv3e11xc!o(!c$p8&h1fcd6a)g!do60-mz*4lahs#(kx$m8$)7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+# Redirect all HTTP requests to HTTPS
+# Prevents unencrypted data transmission
+# Redirect all non-HTTPS requests to HTTPS
+SECURE_SSL_REDIRECT = True
+# Enforce HTTPS via HTTP Strict Transport Security (HSTS)
+# Browsers will refuse HTTP connections for this domain
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 # Prevent reflected XSS attacks
 SECURE_BROWSER_XSS_FILTER = True
 # Prevent MIME-typer sniffing
@@ -34,6 +43,8 @@ X_FRAME_OPTIONS = 'DENY'
 # only send cookies over HTTPS
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 ALLOWED_HOSTS = []
 

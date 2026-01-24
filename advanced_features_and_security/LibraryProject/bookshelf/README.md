@@ -19,3 +19,9 @@ Permissions are enforced in views using the `@permission_required` decorator.
 
 Example:
 @permission_required("bookshelf.can_edit", raise_exception=True)
+
+### Deployment documentation
+HTTPS is enforced using an SSL/TLS certificate configured at the web server (Nginx) level.
+All incoming HTTP traffic is redirected to HTTPS.
+Django is configured to trust the reverse proxy via SECURE_PROXY_SSL_HEADER, enabling correct handling of secure cookies and redirects.
+HSTS headers are enabled to instruct browsers to always use HTTPS for future requests.
